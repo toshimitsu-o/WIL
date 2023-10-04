@@ -5,19 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Projectfile extends Model
+class Allocation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'user_id',
         'project_id',
-        'filetype',
-        'filepath',
     ];
 
     /**
-     * Get project assosiated with the project file
+     * Get user assosiated with the allocation
+     */
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get project assosiated with the allocation
      */
     public function project() {
         return $this->belongsTo(Project::class);

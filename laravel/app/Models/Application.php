@@ -16,14 +16,14 @@ class Application extends Model
     ];
 
     /**
-     * Get user assosiate with the application
+     * Get user assosiated with the application
      */
     public function user() {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Get project assosiate with the application
+     * Get project assosiated with the application
      */
     public function project() {
         return $this->belongsTo(Project::class);

@@ -20,23 +20,30 @@ class Project extends Model
     ];
 
     /**
-     * Get user assosiate with the project
+     * Get user assosiated with the project
      */
     public function user() {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Get projectfiles assosiate with the project
+     * Get projectfiles assosiated with the project
      */
     public function projectfiles() {
         return $this->hasMany(Projectfile::class);
     }
 
     /**
-     * Get applications assosiate with the project
+     * Get applications assosiated with the project
      */
     public function applications() {
         return $this->hasMany(Application::class);
+    }
+
+    /**
+     * Get allocations assosiated with the project
+     */
+    public function allocations() {
+        return $this->hasMany(Allocation::class);
     }
 }
