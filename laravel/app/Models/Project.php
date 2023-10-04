@@ -46,4 +46,11 @@ class Project extends Model
     public function allocations() {
         return $this->hasMany(Allocation::class);
     }
+
+    /**
+     * Get attributes assosiated with the project
+     */
+    public function attributes() {
+        return $this->belongsToMany(Attribute::class);
+    }
 }

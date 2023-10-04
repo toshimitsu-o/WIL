@@ -63,4 +63,11 @@ class User extends Authenticatable
     public function allocation() {
         return $this->belongsTo(Allocation::class);
     }
+
+    /**
+     * Get attributes assosiated with the user
+     */
+    public function attributes() {
+        return $this->belongsToMany(Attribute::class);
+    }
 }

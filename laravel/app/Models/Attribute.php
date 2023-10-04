@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
-    use HasFactory;
+    /**
+     * Get users assosiated with the attribute
+     */
+    public function users() {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Get projects assosiated with the attribute
+     */
+    public function projects() {
+        return $this->belongsToMany(Project::class);
+    }
 }
