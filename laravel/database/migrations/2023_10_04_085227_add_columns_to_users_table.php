@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('usertype');
+            $table->enum('usertype',['teacher','student','ip']);
             $table->timestamp('approved_at')->nullable();
             $table->float('gpa')->nullable();
         });

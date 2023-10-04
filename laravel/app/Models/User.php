@@ -42,4 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Relations to projects
+     *
+     */
+    public function projects() {
+        return $this->hasMany(Project::class);
+    }
 }
