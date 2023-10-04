@@ -19,7 +19,17 @@ class Project extends Model
         'email',
     ];
 
-    function user() {
+    /**
+     * Get user assosiate with the project
+     */
+    public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get projectfiles assosiate with the project
+     */
+    public function projectfiles() {
+        return $this->hasMany(Projectfile::class);
     }
 }

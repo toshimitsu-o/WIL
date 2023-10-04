@@ -44,8 +44,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Relations to projects
-     *
+     * Get projects assosiate with the user
      */
     public function projects() {
         return $this->hasMany(Project::class);
