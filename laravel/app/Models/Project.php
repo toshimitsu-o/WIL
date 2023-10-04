@@ -32,4 +32,11 @@ class Project extends Model
     public function projectfiles() {
         return $this->hasMany(Projectfile::class);
     }
+
+    /**
+     * Get applications assosiate with the project
+     */
+    public function applications() {
+        return $this->hasMany(Application::class);
+    }
 }

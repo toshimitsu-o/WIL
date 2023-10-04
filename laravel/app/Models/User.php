@@ -49,4 +49,11 @@ class User extends Authenticatable
     public function projects() {
         return $this->hasMany(Project::class);
     }
+
+    /**
+     * Get applications assosiate with the user
+     */
+    public function applications() {
+        return $this->hasMany(Application::class);
+    }
 }
