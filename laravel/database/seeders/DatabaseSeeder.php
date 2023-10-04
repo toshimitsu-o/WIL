@@ -12,7 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
+        $this->call(AttributeSeeder::class);
+
+        // Create student users
+        \App\Models\User::factory()->count(30)->student()->create();
+        // Create 1 teacher, 3 ip users
+        $this->call(UserSeeder::class);
+
+        \App\Models\Project::factory()->count(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

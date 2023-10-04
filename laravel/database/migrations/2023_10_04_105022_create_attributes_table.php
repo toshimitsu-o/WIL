@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->text('name');
             $table->enum('attributetype',['role','skill','industry']);
         });

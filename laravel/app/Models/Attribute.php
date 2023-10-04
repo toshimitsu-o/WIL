@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
+    public $timestamps = false;
+    
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'attributetype',
+    ];
+
     /**
      * Get users assosiated with the attribute
      */

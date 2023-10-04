@@ -35,4 +35,15 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the usertype should be student.
+     */
+    public function student(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'usertype' => 'student',
+            'gpa' => fake()->randomFloat(1, 4, 7),
+        ]);
+    }
 }
