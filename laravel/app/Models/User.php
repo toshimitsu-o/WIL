@@ -68,6 +68,6 @@ class User extends Authenticatable
      * Get attributes assosiated with the user
      */
     public function attributes() {
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsToMany(Attribute::class, 'user_attribute');
     }
 }

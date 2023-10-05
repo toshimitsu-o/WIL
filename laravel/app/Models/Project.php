@@ -51,6 +51,6 @@ class Project extends Model
      * Get attributes assosiated with the project
      */
     public function attributes() {
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsToMany(Attribute::class, 'project_attribute');
     }
 }
