@@ -47,6 +47,14 @@
             @endif
         </div>
 
+        @if ($user->usertype === 'student')
+        <div>
+            <x-input-label for="gpa" :value="__('GPA')" />
+            <x-text-input id="gpa" name="gpa" type="number" step="0.1" class="mt-1 block w-full" :value="old('gpa', $user->gpa)" required autofocus />
+            <x-input-error class="mt-2" :messages="$errors->get('gpa')" />
+        </div>
+        @endif
+        
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
