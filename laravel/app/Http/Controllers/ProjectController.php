@@ -7,7 +7,6 @@ use App\Models\Project;
 use App\Rules\WordCount;
 use App\Models\Attribute;
 use App\Models\User;
-use App\Http\Controllers\Auth;
 
 class ProjectController extends Controller
 {
@@ -51,7 +50,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->usertype !== 'ip') {
+        if ($request->user()->usertype !== 'ip' || is_null($request->user()->approved_at)) {
             return back()->withErrors(array('You do not have a permission for this action.'))->withInput();
         }
 
@@ -138,7 +137,7 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         $project = Project::find($id);
-        
+
         if (auth()->id() !== $project->user_id) {
             return back()->withErrors(array('You do not have a permission for this action.'))->withInput();
         }

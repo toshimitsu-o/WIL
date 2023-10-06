@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use App\Models\Project;
 use App\Models\User;
 
@@ -22,6 +23,10 @@ Route::resource('project', ProjectController::class);
 Route::get('/project', [ProjectController::class, 'index'])->name('project');
 
 Route::get('/project/provider/{userId}', [ProjectController::class, 'by_ip'])->name('project.by_ip');
+
+Route::get('/students', [UserController::class, 'students'])->name('students');
+
+Route::get('/student/{id}', [UserController::class, 'student'])->name('students');
 
 Route::get('/', function () {
     return view('welcome');

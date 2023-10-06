@@ -3,7 +3,7 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Project') }}
         </h2>
-        @if (Auth::user()->usertype === 'ip')
+        @if (Auth::user()->usertype === 'ip' && !is_null(Auth::user()->approved_at))
             <x-link-button :href="url('project/create')">
                 {{ __('Create') }}
             </x-link-button>
