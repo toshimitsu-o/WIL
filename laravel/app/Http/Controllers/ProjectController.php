@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Rules\WordCount;
 use App\Models\Attribute;
+use App\Models\User;
+use App\Http\Controllers\Auth;
 
 class ProjectController extends Controller
 {
@@ -18,7 +20,22 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('project.index')->with('projects', $projects);
+        $offer_years = Project::offer_years();
+        $offer_trimesters = Project::offer_trimesters();
+        return view('project.index', ['projects' => $projects, 'offer_years' => $offer_years, 'offer_trimesters' => $offer_trimesters]);
+    }
+
+    /**
+     * Display projects belong to the ip user.
+     */
+    public function by_ip($userId)
+    {
+        $ip = User::find($userId);
+        if ($ip && $ip->usertype === 'ip') {
+            $projects = Project::where('user_id', $userId)->get();
+            return view('project.by_ip', ['projects' => $projects, 'ip' => $ip]);
+        }
+        return abort(404);
     }
 
     /**
@@ -34,15 +51,25 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->user()->usertype !== 'ip') {
+            return back()->withErrors(array('You do not have a permission for this action.'))->withInput();
+        }
+
         // Validate Title and name must be more than 5 characters, email address must be an email address, description need to be at least 3 words, the number of students (team size) must be between 3 to 6. A project is added for a particular trimester in a particular year (called offering). The valid trimester is 1 to 3. If there is any validation error, the error(s) will be shown next to the form and the form will contain the previously entered values.
         $this->validate($request, [
-            'name' => 'required|th:5',
+            'name' => 'required|min:6',
             'email' => 'required|email:rfc',
             'description' => ['required', new WordCount],
             'capacity' => 'required|numeric|between:3,6',
             'offer_year' => 'required|numeric',
             'offer_trimester' => 'required|numeric|between:1,3',
         ]);
+
+        $duplicates = Project::where('offer_year', $request->offer_year)->where('offer_trimester', $request->offer_trimester)->where('name', $request->name)->get();
+
+        if (count($duplicates) > 0) {
+            return back()->withErrors(array('Cannot use the name. The name is already used in the same offering.'))->withInput();
+        }
 
         $project = new Project();
         $project->name = $request->name;
@@ -51,7 +78,7 @@ class ProjectController extends Controller
         $project->email = $request->email;
         $project->offer_year = $request->offer_year;
         $project->offer_trimester = $request->offer_trimester;
-        $project->user_id = $request->user;
+        $project->user_id = $request->user()->id;
         $project->save();
         return redirect("project/$project->id");
     }
@@ -79,6 +106,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         $this->validate($request, [
             'name' => 'required|min:6',
             'email' => 'required|email:rfc',
@@ -89,6 +117,11 @@ class ProjectController extends Controller
         ]);
 
         $project = Project::find($id);
+
+        if ($request->user()->id !== $project->user_id) {
+            return back()->withErrors(array('You do not have a permission for this action.'))->withInput();
+        }
+
         $project->name = $request->name;
         $project->description = $request->description;
         $project->capacity = $request->capacity;
@@ -105,6 +138,14 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         $project = Project::find($id);
+        
+        if (auth()->id() !== $project->user_id) {
+            return back()->withErrors(array('You do not have a permission for this action.'))->withInput();
+        }
+
+        if (count($project->applications) > 0) {
+            return back()->withErrors(array('Cannot delete the project. The project has applicants already.'));
+        }
         $project->delete();
         return redirect("project");
     }

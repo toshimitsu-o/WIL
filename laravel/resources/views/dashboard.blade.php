@@ -14,4 +14,8 @@
             </div>
         </div>
     </div>
+    @forelse($ips as $ip)
+        <p><a href="{{ url("project/provider/$ip->id") }}">{{ $ip->name }}</a>
+    @endforeach
+    {{ $ips->links()}}
 </x-app-layout>

@@ -4,21 +4,12 @@
             {{ __('Project') }}
         </h2>
     </x-slot>
-    @if (count($errors) > 0)
-        <div class="alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <form action="{{ url('project') }}" method="POST">
         {{ csrf_field() }}
         Name: <input type="text" name="name" value="{{ old('name') }}">
         <br>
-        <textarea class="h-full w-full bg-gray-50 outline-none" placeholder="Description" name="message">{{ old('description') }}</textarea>
+        <textarea class="h-full w-full bg-gray-50 outline-none" placeholder="Description" name="description">{{ old('description') }}</textarea>
         <br>
         Capacity: <input type="number" name="capacity" value="{{ old('capacity') }}">
         <br>

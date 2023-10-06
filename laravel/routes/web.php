@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Models\Project;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +19,16 @@ use App\Http\Controllers\ProjectController;
 
 Route::resource('project', ProjectController::class);
 
+Route::get('/project', [ProjectController::class, 'index'])->name('project');
+
+Route::get('/project/provider/{userId}', [ProjectController::class, 'by_ip'])->name('project.by_ip');
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard')->with('ips', User::users_by_type('ip'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -53,4 +53,23 @@ class Project extends Model
     public function attributes() {
         return $this->belongsToMany(Attribute::class, 'project_attribute');
     }
+
+    /**
+     * Get distinct offer_years
+     */
+    public static function offer_years() {
+        return self::distinct()->orderBy('offer_year', 'asc')->get(['offer_year']);
+    }
+
+    /**
+     * Get distinct offer_years
+     */
+    public static function offer_trimesters() {
+        return self::distinct()->orderBy('offer_trimester', 'asc')->get(['offer_trimester']);
+    }
+
+    public function check_name_duplicate($year, $trimester) {
+        $projects = Project::where('offer_year', $year)->where('offer_trimester', $trimester)->where('name', $this->name)->get();
+        return count($projects) > 0;
+    }
 }

@@ -72,4 +72,15 @@ class User extends Authenticatable
     public function attributes() {
         return $this->belongsToMany(Attribute::class, 'user_attribute');
     }
+
+    /**
+     * Get all users with the usertype
+     * 
+     * @param string Usertype
+     */
+    public static function users_by_type($usertype) {
+        return self::where('usertype', $usertype)->paginate(2);
+    }
+
+
 }
