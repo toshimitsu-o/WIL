@@ -24,6 +24,10 @@ Route::get('/project', [ProjectController::class, 'index'])->name('project');
 
 Route::get('/project/provider/{userId}', [ProjectController::class, 'by_ip'])->name('project.by_ip');
 
+Route::get('/project/{id}/apply/', [ProjectController::class, 'apply'])->name('project.apply');
+
+Route::post('/project/{id}/apply/', [ProjectController::class, 'store_application'])->name('project.apply');
+
 Route::get('/students', [UserController::class, 'students'])->name('students');
 
 Route::get('/student/{id}', [UserController::class, 'student'])->name('students');

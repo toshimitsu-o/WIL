@@ -14,6 +14,13 @@
     @foreach ($project->attributes as $attribute)
         {{ $attribute->name }}
     @endforeach
+
+    @if (Auth::user()->usertype === 'student')
+        <x-link-button :href="url('project/' . $project->id . '/apply')">
+            {{ __('Apply') }}
+        </x-link-button>
+    @endif
+
     <!-- Applications -->
     <p>Aplications for this project ({{ count($project->applications) }})</p>
     @foreach ($project->applications as $application)
@@ -36,7 +43,7 @@
         </div>
     @endforeach
 
-    @if (Auth::user()->id == $project->user_id)
+    @if (Auth::user()->id === $project->user_id)
         <x-link-button :href="url('project/' . $project->id . '/edit')">
             {{ __('Edit') }}
         </x-link-button>

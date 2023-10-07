@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Rules\WordCount;
 use App\Models\Attribute;
 use App\Models\User;
+use App\Models\Application;
 
 class ProjectController extends Controller
 {
@@ -35,6 +36,57 @@ class ProjectController extends Controller
             return view('project.by_ip', ['projects' => $projects, 'ip' => $ip]);
         }
         return abort(404);
+    }
+
+    /**
+     * Show the form for project application.
+     */
+    public function apply($id)
+    {
+        $project = Project::find($id);
+        return view('project.apply', ['project' => $project]);
+    }
+
+    /**
+     * Store a new application in storage.
+     */
+    public function store_application(Request $request, string $id)
+    {
+        $user = $request->user();
+
+        //dd(count($user->applications));
+
+        if ($user->usertype !== 'student') {
+            return back()->withErrors(array('You do not have a permission for this action.'))->withInput();
+        }
+
+        if (count(Application::where('user_id', $user->id)->where('project_id', $id)->get()) > 0) {
+            return back()->withErrors(array('You have already applied to this project.'))->withInput();
+        }
+
+        if (is_null($user->gpa)) {
+            return back()->withErrors(array('Please save your GPA in your profile.'))->withInput();
+        }
+
+        if (count($user->attributes) < 1) {
+            return back()->withErrors(array('Please select preferences in your profile.'))->withInput();
+        }
+
+        if (count($user->applications) >= 3) {
+            return back()->withErrors(array('You have already applied for 3 projects.'))->withInput();
+        }
+
+        $this->validate($request, [
+            'justification' => 'required|min:1',
+        ]);
+
+        $application = new Application();
+        $application->justification = $request->justification;
+        $application->user_id = $user->id;
+        $application->project_id = $id;
+        $application->save();
+        return redirect("project/$id");
+
     }
 
     /**

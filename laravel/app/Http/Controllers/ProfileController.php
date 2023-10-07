@@ -87,7 +87,7 @@ class ProfileController extends Controller
     {
         $errors = array();
 
-        if (!is_array($attributes) || empty($attributes)) {
+        if (!is_array($attributes) || count($attributes) === 0) {
             $errors[] = ["Select at least one prefference for each."];
             return $errors;
         }
