@@ -14,33 +14,49 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        body {
+            background: rgb(34, 193, 195);
+            background: linear-gradient(180deg, rgb(89, 233, 236) 0%, rgb(167, 104, 248) 100%);
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <header class="m-auto w-full max-w-screen-lg flex items-center">
+                <div class="py-6 sm:px-5 grow">
                     {{ $header }}
                 </div>
+                @if (isset($actions))
+                <div class="flex gap-2 mr-5">
+                    {{ $actions }}
+                </div>
+                @endif
             </header>
         @endif
         @if (count($errors) > 0)
-        <div class="text-red-600">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+            <div class="text-red-600">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <!-- Page Content -->
-        <main>
+        <main class="m-auto my-6 w-full max-w-screen-lg grow rounded-3xl bg-white bg-opacity-70 p-5 text-gray-700">
             {{ $slot }}
         </main>
+    </div>
+    <div class="m-10 flex w-full items-end">
+        <div class="container mx-auto px-5 py-4">
+            <p class="text-sm capitalize text-gray-700 text-center">© 2023 NEXTWIL All rights reserved</p>
+        </div>
     </div>
 </body>
 

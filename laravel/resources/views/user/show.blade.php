@@ -1,10 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+        <h2 class="text-2xl font-semibold leading-tight text-indigo-700 capitalize">
             {{ __($usertype ?? 'User') }}
         </h2>
     </x-slot>
-    <h3>{{ $user->name }}</h3>
+    <x-slot name="actions">
+        @if (Auth::user()->id === $user->id)
+        <x-link-button :href="url('profile')">
+            {{ __('Edit') }}
+        </x-link-button>
+        @endif
+    </x-slot>
+    <div class="mx-auto max-w-7xl py-8 sm:px-6 lg:px-8">
+        <h3 class="pb-2 text-xl font-semibold text-gray-600">{{ $user->name }}</h3>
     <p>Email: {{ $user->email }}</p>
     @if ($user->usertype === 'student')
         <p>GPA: {{ $user->gpa ?? 'n/a' }}</p>
@@ -48,10 +56,6 @@
         @endforelse
     </div>
 @endif
-@if (Auth::user()->id === $user->id)
-        <x-link-button :href="url('profile')">
-            {{ __('Edit') }}
-        </x-link-button>
-        @endif
+
 
 </x-app-layout>

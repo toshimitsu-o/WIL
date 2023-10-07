@@ -79,7 +79,7 @@ class User extends Authenticatable
      * @param string Usertype
      */
     public static function users_by_type($usertype) {
-        return self::where('usertype', $usertype)->paginate(2);
+        return self::where('usertype', $usertype)->paginate(5);
     }
 
 

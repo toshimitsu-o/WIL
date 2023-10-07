@@ -1,21 +1,33 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+        <h2 class="text-2xl font-semibold leading-tight text-indigo-700">
+            {{ __('Industry Partners') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+    <div class="mx-auto max-w-7xl py-8 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            @forelse($ips as $ip)
+                <div class="m-5 rounded-2xl bg-white p-5 flex items-center"><div class="grow"><a
+                        href="{{ url("project/provider/$ip->id") }}">{{ $ip->name }}</a></div>
+                    {{-- Approve Button --}}
+                    @if (Auth::user()->usertype === 'teacher' && empty($useipr->approved_at))
+                        <div>
+                            <form method="POST" action="{{ url('partner/' . $ip->id . '/approve') }}">
+                                @csrf
+                                @method('PATCH')
+                                <x-primary-button class="ml-3">{{ __('Approve') }}
+                                </x-primary-button>
+                            </form>
+                        </div>
+                    @endif
+                    {{-- Approve Button --}}
                 </div>
-            </div>
+            @endforeach
+
         </div>
+        {{ $ips->links() }}
     </div>
-    @forelse($ips as $ip)
-        <p><a href="{{ url("project/provider/$ip->id") }}">{{ $ip->name }}</a>
-    @endforeach
-    {{ $ips->links()}}
+
+
 </x-app-layout>

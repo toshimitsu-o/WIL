@@ -1,8 +1,9 @@
-<nav x-data="{ open: false }" class="border-b border-gray-100 bg-white">
+<nav x-data="{ open: false }" class="sticky top-0 z-30 p-3">
     <!-- Primary Navigation Menu -->
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="w-full">
         <div class="flex h-16 justify-between">
-            <div class="flex">
+            <div
+                class="flex justify-between rounded-full bg-white bg-opacity-50 px-7  text-gray-500 drop-shadow-xl backdrop-blur-md">
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center">
                     <a href="{{ route('dashboard') }}">
@@ -13,14 +14,14 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Partners') }}
                     </x-nav-link>
                     <x-nav-link :href="route('project')" :active="request()->routeIs('project')">
                         {{ __('Projects') }}
                     </x-nav-link>
-                    <x-nav-link :href="url('partners')" :active="request()->routeIs('ips')">
+                    {{-- <x-nav-link :href="url('partners')" :active="request()->routeIs('ips')">
                         {{ __('Partners') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                     @if (Auth::user()->usertype === 'teacher')
                         <x-nav-link :href="url('students')" :active="request()->routeIs('students')">
                             {{ __('Students') }}

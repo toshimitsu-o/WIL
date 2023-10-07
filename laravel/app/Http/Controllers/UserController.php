@@ -16,7 +16,7 @@ class UserController extends Controller
         if (Auth::user()->usertype !== 'teacher') {
             return redirect('dashboard');
         }
-        $users = User::where('usertype', 'student')->get();
+        $users = User::where('usertype', 'student')->paginate(20);
         return view('user.index', ['users' => $users, 'usertype' => 'student']);
     }
 

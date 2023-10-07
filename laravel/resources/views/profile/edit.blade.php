@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="text-2xl font-semibold leading-tight text-indigo-700">
             {{ __('Profile') }}
         </h2>
     </x-slot>
@@ -13,11 +13,13 @@
                 </div>
             </div>
 
+            @if (Auth::user()->usertype === 'student')
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-attributes-information-form')
                 </div>
             </div>
+            @endif
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
