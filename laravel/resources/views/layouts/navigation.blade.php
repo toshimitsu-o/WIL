@@ -16,11 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('project')" :active="request()->routeIs('project')">
-                        {{ __('Project') }}
+                        {{ __('Projects') }}
                     </x-nav-link>
                     @if (Auth::user()->usertype === 'teacher')
                         <x-nav-link :href="url('students')" :active="request()->routeIs('students')">
                             {{ __('Students') }}
+                        </x-nav-link>
+                    @endif
+                    @if (Auth::user()->usertype === 'student')
+                        <x-nav-link :href="url('student/' . Auth::user()->id)" :active="request()->routeIs('students')">
+                            {{ __('Profile') }}
                         </x-nav-link>
                     @endif
                 </div>

@@ -20,14 +20,16 @@ class UserController extends Controller
     }
 
     /**
-     * Display users with usertype student.
+     * Display student profile.
+     * 
+     * @param string $id userid
      */
     public function student(string $id)
     {
-        if (Auth::user()->usertype !== 'teacher') {
-            return redirect('dashboard');
+        if (Auth::user()->usertype === 'teacher' || Auth::user()->id == $id) {
+            $user = User::find($id);
+            return view('user.show', ['user' => $user, 'usertype' => 'student']);
         }
-        $user = User::find($id);
-        return view('user.show', ['user' => $user, 'usertype' => 'student']);
+        return redirect('dashboard');
     }
 }
