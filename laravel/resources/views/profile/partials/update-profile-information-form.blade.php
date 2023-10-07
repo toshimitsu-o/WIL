@@ -19,7 +19,7 @@
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
@@ -50,7 +50,7 @@
         @if ($user->usertype === 'student')
         <div>
             <x-input-label for="gpa" :value="__('GPA')" />
-            <x-text-input id="gpa" name="gpa" type="number" step="0.1" class="mt-1 block w-full" :value="old('gpa', $user->gpa)" required autofocus />
+            <x-text-input id="gpa" name="gpa" type="number" step="0.1" class="mt-1 block w-full" :value="old('gpa', $user->gpa)" />
             <x-input-error class="mt-2" :messages="$errors->get('gpa')" />
         </div>
         @endif

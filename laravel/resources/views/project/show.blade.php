@@ -10,24 +10,44 @@
     <p>Team Capacity: {{ $project->capacity }}</p>
     <p>Email: {{ $project->email }}</p>
     <p>Offering: Trimester {{ $project->offer_trimester }}, {{ $project->offer_year }}</p>
-    <p># of pplications: {{ count($project->applications) }}</p>
+    <!-- Attributes -->
     @foreach ($project->attributes as $attribute)
         {{ $attribute->name }}
     @endforeach
+    <!-- Applications -->
+    <p>Aplications for this project ({{ count($project->applications) }})</p>
+    @foreach ($project->applications as $application)
+        <div class="my-5">
+            Applicant: {{ $application->user->name }} <br>
+            Justification: {{ $application->justification }}
+        </div>
+    @endforeach
 
+    <!-- Allocations -->
+    <p>Student Assignment for this project ({{ count($project->allocations) }})</p>
+    @foreach ($project->allocations as $allocation)
+        <div class="my-5">
+            Student: {{ $allocation->user->name }} <br>
+            GPA: {{ $application->user->gpa }}
+            Attributes: {{ $application->user->attributes }}
+            @foreach ($application->user->attributes as $attribute)
+                {{ $attribute->name }}
+            @endforeach
+        </div>
+    @endforeach
 
     @if (Auth::user()->id == $project->user_id)
-    <x-link-button :href="url('project/' . $project->id . '/edit')">
-        {{ __('Edit') }}
-    </x-link-button>
+        <x-link-button :href="url('project/' . $project->id . '/edit')">
+            {{ __('Edit') }}
+        </x-link-button>
 
-    <form method="POST" action="{{ url("project/$project->id") }}">
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        <x-danger-button class="ml-3">
-            {{ __('Delete Project') }}
-        </x-danger-button>
-    </form>
+        <form method="POST" action="{{ url("project/$project->id") }}">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <x-danger-button class="ml-3">
+                {{ __('Delete Project') }}
+            </x-danger-button>
+        </form>
     @endif
-    
+
 </x-app-layout>
