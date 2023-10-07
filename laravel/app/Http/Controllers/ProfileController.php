@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Attribute;
 
 class ProfileController extends Controller
 {
@@ -18,6 +19,7 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => $request->user(),
+            'attributes' => Attribute::all(),
         ]);
     }
 
@@ -56,5 +58,63 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update_attributes(Request $request)
+    {
+        $errors = $this->validate_attributes($request->input('attributes'));
+        if ($errors) {
+            return back()->withErrors($errors)->withInput();
+        }
+
+        $user = $request->user();
+        $user->attributes()->sync($request->input('attributes'));
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Validate attributes selection.
+     * 
+     * @param array $attributes selection of attribute
+     * 
+     * @return array Array of error messages
+     */
+    private function validate_attributes($attributes)
+    {
+        $errors = array();
+
+        if (!is_array($attributes) || empty($attributes)) {
+            $errors[] = ["Select at least one prefference for each."];
+            return $errors;
+        }
+
+        $attributetype_count = [
+            'role' => 0,
+            'industry' => 0,
+            'skill' => 0
+        ];
+
+        foreach ($attributes as $attribute) {
+            $attribute = Attribute::find($attribute);
+            if ($attribute) {
+                $attributetype_count[$attribute->attributetype] += 1;
+            }
+        }
+
+        if ($attributetype_count['role'] < 1) {
+            $errors['role'] = ["At least one role must be selected."];
+        }
+        if ($attributetype_count['industry'] < 1) {
+            $errors['industry'] = ["At least one industry must be selected."];
+        }
+        if ($attributetype_count['skill'] < 1) {
+            $errors['skill'] = ["At least one skill must be selected."];
+        }
+
+        return $errors;
     }
 }

@@ -20,7 +20,7 @@ class Attribute extends Model
      * Get users assosiated with the attribute
      */
     public function users() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_attribute');
     }
 
     /**
