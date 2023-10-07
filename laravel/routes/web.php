@@ -32,6 +32,10 @@ Route::get('/students', [UserController::class, 'students'])->name('students');
 
 Route::get('/student/{id}', [UserController::class, 'student'])->name('students');
 
+Route::get('/partners', [UserController::class, 'ips'])->name('ips');
+
+Route::patch('/partner/{id}/approve', [UserController::class, 'approve_ip'])->name('ips.approve_ip');
+
 Route::get('/', function () {
     return view('welcome');
 });

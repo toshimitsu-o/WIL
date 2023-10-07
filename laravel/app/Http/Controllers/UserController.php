@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -31,5 +32,35 @@ class UserController extends Controller
             return view('user.show', ['user' => $user, 'usertype' => 'student']);
         }
         return redirect('dashboard');
+    }
+
+    /**
+     * Display IPs.
+     */
+    public function ips()
+    {
+        $users = User::where('usertype', 'ip')->get();
+        return view('user.ips', ['users' => $users]);
+    }
+
+    /**
+     * Store a new application in storage.
+     */
+    public function approve_ip(Request $request, string $id)
+    {
+        $user = $request->user();
+        
+
+        //dd(count($user->applications));
+
+        if ($user->usertype !== 'teacher') {
+            return back()->withErrors(array('You do not have a permission for this action.'));
+        }
+
+        $ip = User::find($id);
+        $ip->approved_at = now();
+        $ip->save();
+        return back();
+
     }
 }

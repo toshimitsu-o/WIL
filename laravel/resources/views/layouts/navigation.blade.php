@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('project')" :active="request()->routeIs('project')">
                         {{ __('Projects') }}
                     </x-nav-link>
+                    <x-nav-link :href="url('partners')" :active="request()->routeIs('ips')">
+                        {{ __('Partners') }}
+                    </x-nav-link>
                     @if (Auth::user()->usertype === 'teacher')
                         <x-nav-link :href="url('students')" :active="request()->routeIs('students')">
                             {{ __('Students') }}
