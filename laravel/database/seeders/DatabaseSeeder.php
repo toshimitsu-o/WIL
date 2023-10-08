@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         // Attach attributes for students and projects
         $this->call(UserAttributeSeeder::class);
         $this->call(ProjectAttributeSeeder::class);
+        
+        // Seed applications for students and projects
+        $this->call(ApplicationSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
