@@ -1,4 +1,36 @@
 <x-app-layout>
+    <x-slot name="add_script">
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+        <script type="text/javascript">
+            // Solution Source: https://www.tutsmake.com/laravel-8-dynamically-multiple-add-or-remove-input-fields-using-jquery/
+            $(function() {
+                var i = 0;
+                $("#add-image-btn").click(function() {
+                    ++i;
+                    $("#image-upload").append(`
+                    <div class="flex gap-4">
+                        <div class="grow">
+                            <input id="images[${i}]" name="images[${i}]" type="file"
+                                class="mt-1 block w-full" />
+                        </div>
+                    </div>
+                    `);
+                });
+                var j = 0;
+                $("#add-pdf-btn").click(function() {
+                    ++i;
+                    $("#pdf-upload").append(`
+                    <div class="flex gap-4">
+                        <div class="grow">
+                            <input id="pdfs[${j}]" name="pdfs[${j}]" type="file"
+                                class="mt-1 block w-full" />
+                        </div>
+                    </div>
+                    `);
+                });
+            });
+        </script>
+    </x-slot>
     <x-slot name="header">
         <h2 class="text-2xl font-semibold leading-tight text-indigo-700">
             {{ __('Projects') }}
@@ -14,7 +46,7 @@
     <div class="mx-auto max-w-7xl py-8 sm:px-6 lg:px-8">
         <h3 class="pb-2 text-xl font-semibold text-gray-600">PROJECT: {{ $project->name }}</h3>
 
-        <form action="{{ url("project/$project->id") }}" method="POST">
+        <form action="{{ url("project/$project->id") }}" method="POST" enctype="multipart/form-data">
             <div class="my-5 space-y-6 rounded-2xl bg-white p-5">
                 @csrf
                 {{ method_field('PUT') }}
@@ -49,7 +81,6 @@
                     <x-text-input id="offer_trimester" name="offer_trimester" type="number" class="mt-1 block w-full" :value="old('offer_trimester', $project->offer_trimester)" />
                     <x-input-error class="mt-2" :messages="$errors->get('offer_year')" />
                 </div>
-
 
                 <div>
                     <x-input-label for="name" :value="__('Role')" />
@@ -98,7 +129,34 @@
                     @endforeach
                     <x-input-error class="mt-2" :messages="$errors->get('industry')" />
                 </div>
-
+                {{-- Image uploads --}}
+                <h4 class="font-semibold">Image Attachment</h4>
+                <div id="image-upload">
+                    <div class="flex gap-4">
+                        <div class="grow">
+                            <input id="images[0]" name="images[0]" type="file" class="mt-1 block w-full" />
+                            <x-input-error class="mt-2" :messages="$errors->get('images[0]')" />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" name="add" id="add-image-btn"
+                    class="ml-3 inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900">Add
+                    More Image</button>
+                {{-- End: Image uploads --}}
+                {{-- PDF uploads --}}
+                <h4 class="font-semibold">PDF Attachment</h4>
+                <div id="pdf-upload">
+                    <div class="flex gap-4">
+                        <div class="grow">
+                            <input id="pdfs[0]" name="pdfs[0]" type="file" class="mt-1 block w-full" />
+                            <x-input-error class="mt-2" :messages="$errors->get('pdfs[0]')" />
+                        </div>
+                    </div>
+                </div>
+                <button type="button" name="add" id="add-pdf-btn"
+                    class="ml-3 inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900">Add
+                    More PDF</button>
+                {{-- End: PDF uploads --}}
             </div>
             <div class="mt-5 flex">
                 <div class="grow text-right"> </div>

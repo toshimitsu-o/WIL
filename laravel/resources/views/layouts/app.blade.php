@@ -14,6 +14,9 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (isset($add_script))
+        {{ $add_script }}
+    @endif
     <style>
         body {
             background: rgb(34, 193, 195);

@@ -11,7 +11,9 @@ use App\Models\Application;
 
 class ProjectController extends Controller
 {
-    public function __construct() { $this->middleware('auth');
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 
     /**
@@ -27,8 +29,10 @@ class ProjectController extends Controller
 
     /**
      * Display projects belong to the ip user.
+     * 
+     * @param string $userId
      */
-    public function by_ip($userId)
+    public function by_ip(string $userId)
     {
         $ip = User::find($userId);
         if ($ip && $ip->usertype === 'ip') {
@@ -40,8 +44,10 @@ class ProjectController extends Controller
 
     /**
      * Show the form for project application.
+     * 
+     * @param string $id Project ID
      */
-    public function apply($id)
+    public function apply(string $id)
     {
         $project = Project::find($id);
         return view('project.apply', ['project' => $project]);
@@ -49,6 +55,8 @@ class ProjectController extends Controller
 
     /**
      * Store a new application in storage.
+     * 
+     *  @param string $id Project ID
      */
     public function store_application(Request $request, string $id)
     {
@@ -86,7 +94,6 @@ class ProjectController extends Controller
         $application->project_id = $id;
         $application->save();
         return redirect("project/$id");
-
     }
 
     /**
@@ -102,6 +109,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         if ($request->user()->usertype !== 'ip' || is_null($request->user()->approved_at)) {
             return back()->withErrors(array('You do not have a permission for this action.'))->withInput();
         }
@@ -109,10 +117,10 @@ class ProjectController extends Controller
         // Validate Title and name must be more than 5 characters, email address must be an email address, description need to be at least 3 words, the number of students (team size) must be between 3 to 6. A project is added for a particular trimester in a particular year (called offering). The valid trimester is 1 to 3. If there is any validation error, the error(s) will be shown next to the form and the form will contain the previously entered values.
         $this->validate($request, [
             'name' => 'required|min:6',
-            'email' => 'required|email:rfc',
+            'email' => 'required|email:rfc,dns',
             'description' => ['required', new WordCount],
             'capacity' => 'required|numeric|between:3,6',
-            'offer_year' => 'required|numeric',
+            'offer_year' => 'required|numeric|min:4',
             'offer_trimester' => 'required|numeric|between:1,3',
         ]);
 
@@ -122,6 +130,9 @@ class ProjectController extends Controller
             return back()->withErrors(array('Cannot use the name. The name is already used in the same offering.'))->withInput();
         }
 
+
+
+        // Create and save project
         $project = new Project();
         $project->name = $request->name;
         $project->description = $request->description;
@@ -131,6 +142,25 @@ class ProjectController extends Controller
         $project->offer_trimester = $request->offer_trimester;
         $project->user_id = $request->user()->id;
         $project->save();
+        // Attach attributes to add
+        $project->attributes()->attach($request->input('attributes'));
+        // Save files
+        if ($request->file('images')) {
+            foreach ($request->file('images') as $file) {
+                    // Store file and get filepath with a file name generated uniquely
+                    $filepath = $file->store('project_files', 'public');
+                    $project->projectfiles()->create(['filepath' => $filepath, 'filetype' => 'img']);
+            }
+        }
+        if ($request->file('pdfs')) {
+            foreach ($request->file('pdfs') as $file) {
+                    // Store file and get filepath with a file name generated uniquely
+                    $filepath = $file->store('project_files', 'public');
+                    $project->projectfiles()->create(['filepath' => $filepath, 'filetype' => 'pdf']);
+            }
+        }
+        
+
         return redirect("project/$project->id");
     }
 
@@ -157,7 +187,6 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
         $this->validate($request, [
             'name' => 'required|min:6',
             'email' => 'required|email:rfc',
@@ -180,6 +209,24 @@ class ProjectController extends Controller
         $project->offer_year = $request->offer_year;
         $project->offer_trimester = $request->offer_trimester;
         $project->save();
+
+        // Sync attributes to update
+        $project->attributes()->sync($request->input('attributes'));
+        // Save files
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                    // Store file and get filepath with a file name generated uniquely
+                    $filepath = $file->store('project_files', 'public');
+                    $project->projectfiles()->create(['filepath' => $filepath, 'filetype' => 'img']);
+            }
+        }
+        if ($request->file('pdfs')) {
+            foreach ($request->file('pdfs') as $file) {
+                    // Store file and get filepath with a file name generated uniquely
+                    $filepath = $file->store('project_files', 'public');
+                    $project->projectfiles()->create(['filepath' => $filepath, 'filetype' => 'pdf']);
+            }
+        }
         return redirect("project/$project->id");
     }
 

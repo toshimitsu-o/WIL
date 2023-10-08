@@ -32,6 +32,11 @@
                             {{ __('Profile') }}
                         </x-nav-link>
                     @endif
+                    @if (Auth::user()->usertype === 'ip')
+                        <x-nav-link :href="url('project/provider/' . Auth::user()->id)">
+                            {{ __('Profile') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
