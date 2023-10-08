@@ -30,6 +30,8 @@ Route::post('/project/{id}/apply/', [ProjectController::class, 'store_applicatio
 
 Route::get('/students', [UserController::class, 'students'])->name('students');
 
+Route::post('/students/auto_allocate', [UserController::class, 'auto_allocate'])->name('students.auto_allocate');
+
 Route::get('/student/{id}', [UserController::class, 'student'])->name('students');
 
 Route::get('/partners', [UserController::class, 'ips'])->name('ips');

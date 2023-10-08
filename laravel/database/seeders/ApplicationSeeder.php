@@ -39,7 +39,7 @@ class ApplicationSeeder extends Seeder
                 
                 $matched = array_intersect($user_attributes, $project_attributes);
 
-                Log::info('Matched:' . count($matched). 'user:'  . count($user_attributes) . 'project:' . count($project_attributes));
+                //Log::info('Matched:' . count($matched). 'user:'  . count($user_attributes) . 'project:' . count($project_attributes));
 
                 if (count($matched) >= 1) {
                     $application = new Application();
