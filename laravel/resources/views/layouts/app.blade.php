@@ -28,14 +28,14 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="m-auto w-full max-w-screen-lg flex items-center">
-                <div class="py-6 sm:px-5 grow">
+            <header class="m-auto flex w-full max-w-screen-lg items-center">
+                <div class="grow py-6 sm:px-5">
                     {{ $header }}
                 </div>
                 @if (isset($actions))
-                <div class="flex gap-2 mr-5">
-                    {{ $actions }}
-                </div>
+                    <div class="mr-5 flex gap-2">
+                        {{ $actions }}
+                    </div>
                 @endif
             </header>
         @endif
@@ -55,7 +55,7 @@
     </div>
     <div class="m-10 flex w-full items-end">
         <div class="container mx-auto px-5 py-4">
-            <p class="text-sm capitalize text-gray-700 text-center">© 2023 NEXTWIL All rights reserved</p>
+            <p class="text-center text-sm capitalize text-gray-700">© 2023 NEXTWIL All rights reserved</p>
         </div>
     </div>
 </body>

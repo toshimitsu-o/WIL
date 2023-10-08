@@ -3,7 +3,7 @@
     <div class="w-full">
         <div class="flex h-16 justify-between">
             <div
-                class="flex justify-between rounded-full bg-white bg-opacity-50 px-7  text-gray-500 drop-shadow-xl backdrop-blur-md">
+                class="flex justify-between rounded-full bg-white bg-opacity-50 px-7 text-gray-500 drop-shadow-xl backdrop-blur-md">
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center">
                     <a href="{{ route('dashboard') }}">
@@ -40,7 +40,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
+                            class="inline-flex items-center rounded-full bg-white bg-opacity-50 px-5 py-4 text-sm font-medium leading-4 text-gray-500 drop-shadow-xl backdrop-blur-md transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
                             <div>{{ Auth::user()->name }} (<span class="uppercase">{{ Auth::user()->usertype }}</span>)
                             </div>
 

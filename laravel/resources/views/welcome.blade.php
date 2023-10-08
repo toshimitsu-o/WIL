@@ -26,7 +26,8 @@
     <div class="min-h-screen">
         <header class="m-auto flex w-full max-w-screen-lg items-center">
             <div class="m-auto py-10 sm:px-5">
-                <h1 class="text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-tl from-sky-500 to-violet-900 inline">
+                <h1
+                    class="inline bg-gradient-to-tl from-sky-500 to-violet-900 bg-clip-text text-8xl font-extrabold text-transparent">
                     WIL Work Placement
                 </h1>
             </div>
@@ -37,18 +38,24 @@
             @if (Route::has('login'))
                 <div class="flex">
                     @auth
-                        <a href="{{ url('/home') }}"
-                            class="font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white">Home</a>
+                        <div class="m-5 flex-1 rounded-2xl bg-white p-5">
+                            <a href="{{ url('/home') }}"
+                                class="font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white">Home</a>
+                        </div>
                     @else
-                        <div class="m-5 rounded-2xl bg-white p-5">
+                        <div class="m-5 flex-1 rounded-2xl bg-white p-10">
+                            <h3 class="mb-8 text-lg font-semibold">Welcome back!</h3>
+                            <p class="mb-8">Please login to your account to continue.</p>
                             <a href="{{ route('login') }}"
-                                class="font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white">Log
+                                class="inline-block w-full rounded-full bg-gradient-to-tl from-sky-500 to-violet-900 py-4 text-center font-semibold uppercase text-white opacity-90 hover:opacity-100 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white text-lg">Log
                                 in</a>
                         </div>
                         @if (Route::has('register'))
-                            <div class="m-5 rounded-2xl bg-white p-5">
+                            <div class="m-5 flex-1 rounded-2xl bg-white p-10">
+                                <h3 class="mb-8 text-lg font-semibold">Don't have an account?</h3>
+                            <p class="mb-8">Please sing up to start using today!</p>
                                 <a href="{{ route('register') }}"
-                                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white">Register</a>
+                                    class="inline-block w-full rounded-full bg-gradient-to-tl from-sky-500 to-violet-900 py-4 text-center font-semibold uppercase text-white opacity-90 hover:opacity-100 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white text-lg">Register</a>
                             </div>
                         @endif
                     @endauth
