@@ -16,10 +16,14 @@ class DatabaseSeeder extends Seeder
 
         // Create student users
         \App\Models\User::factory()->count(30)->student()->create();
-        // Create 1 teacher, 3 ip users
+        // Create 1 teacher, 7 ip users
         $this->call(UserSeeder::class);
 
-        \App\Models\Project::factory()->count(10)->create();
+        \App\Models\Project::factory()->count(15)->create();
+
+        // Attach attributes for students and projects
+        $this->call(UserAttributeSeeder::class);
+        $this->call(ProjectAttributeSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Dr. Professor',
+                'name' => 'Professor Smith',
                 'email' => 'teacher@test.com',
                 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -42,6 +42,38 @@ class UserSeeder extends Seeder
             [
                 'name' => 'SmartCloud',
                 'email' => 'ip3@test.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+                'usertype' => 'ip',
+            ],
+            [
+                'name' => 'UltimateNet',
+                'email' => 'ip4@test.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+                'usertype' => 'ip',
+            ],
+            [
+                'name' => 'MegaTech',
+                'email' => 'ip5@test.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+                'usertype' => 'ip',
+            ],
+            [
+                'name' => 'FinTech Motion',
+                'email' => 'ip6@test.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'remember_token' => Str::random(10),
+                'usertype' => 'ip',
+            ],
+            [
+                'name' => 'Giga Technology',
+                'email' => 'ip7@test.com',
                 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
