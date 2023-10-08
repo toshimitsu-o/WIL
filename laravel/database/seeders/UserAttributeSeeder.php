@@ -18,10 +18,10 @@ class UserAttributeSeeder extends Seeder
         foreach ($users as $user) {
             // Get random attribute of each type
             $role = Attribute::where('attributetype', 'role')->get()->random()->id;
-            $skill = Attribute::where('attributetype', 'skill')->get()->random()->id;
+            $skill = Attribute::where('attributetype', 'skill')->get()->random(2)->pluck('id')->toArray();
             $industry = Attribute::where('attributetype', 'industry')->get()->random()->id;
 
-            $user->attributes()->attach([$role, $skill, $industry]);
+            $user->attributes()->attach(array_merge([$role], $skill, [$industry]));
         }
     }
 }

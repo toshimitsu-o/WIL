@@ -113,7 +113,7 @@ class UserController extends Controller
                 }
             }
         }
-        return back()->with('success_message', 'Auto Assign Completed');
+        return back()->with('message', 'Auto Assign Completed!');
     }
 
     /**

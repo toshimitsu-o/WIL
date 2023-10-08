@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'teacher',
+                'approved_at' => now(),
             ],
             [
                 'name' => 'QuantumCyber',
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'ip',
+                'approved_at' => now(),
             ],
             [
                 'name' => 'NextGenTech',
@@ -38,6 +40,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'ip',
+                'approved_at' => now(),
             ],
             [
                 'name' => 'SmartCloud',
@@ -46,6 +49,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'ip',
+                'approved_at' => now(),
             ],
             [
                 'name' => 'UltimateNet',
@@ -54,6 +58,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'ip',
+                'approved_at' => now(),
             ],
             [
                 'name' => 'MegaTech',
@@ -62,6 +67,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'ip',
+                'approved_at' => now(),
             ],
             [
                 'name' => 'FinTech Motion',
@@ -70,6 +76,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'ip',
+                'approved_at' => now(),
             ],
             [
                 'name' => 'Giga Technology',
@@ -78,6 +85,7 @@ class UserSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'usertype' => 'ip',
+                'approved_at' => now(),
             ],
         ];
         DB::table('users')->insert($users);

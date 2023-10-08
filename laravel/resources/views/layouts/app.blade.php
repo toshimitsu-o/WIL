@@ -42,9 +42,9 @@
                 @endif
             </header>
         @endif
-        @if (isset($success_message))
-        <div class="mx-auto w-full max-w-screen-lg bg-green-100 rounded-xl bg-opacity-70 py-2 lg:px-8 text-green-400">
-            {{ $success_message }}
+        @if (session()->has('message'))
+        <div class="mx-auto w-full max-w-screen-lg bg-green-100 rounded-xl bg-opacity-70 py-2 lg:px-8 text-green-700 ">
+            {{ session()->get('message') }}
         </div>
         @endif
         @if (count($errors) > 0)

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
 
         \App\Models\Project::factory()->count(15)->create();
+        $this->call(ProjectfileSeeder::class);
 
         // Attach attributes for students and projects
         $this->call(UserAttributeSeeder::class);

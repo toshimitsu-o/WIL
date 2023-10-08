@@ -18,11 +18,11 @@ class ProjectAttributeSeeder extends Seeder
 
         foreach ($projects as $project) {
             // Get random attribute of each type
-            $role = Attribute::where('attributetype', 'role')->get()->random()->id;
+            $role = Attribute::where('attributetype', 'role')->get()->random(2)->pluck('id')->toArray();
             $skill = Attribute::where('attributetype', 'skill')->get()->random()->id;
             $industry = Attribute::where('attributetype', 'industry')->get()->random()->id;
 
-            $project->attributes()->attach([$role, $skill, $industry]);
+            $project->attributes()->attach(array_merge($role, [$skill], [$industry]));
         }
     }
 }
