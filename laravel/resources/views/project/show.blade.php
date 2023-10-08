@@ -45,7 +45,7 @@
                     <div>
                         <h5 class="mr-1 inline">Role:</h5>
                         @forelse ($project->attributes->where('attributetype', 'role') as $attribute)
-                            {{ $attribute->name }}, 
+                            {{ $attribute->name }},
                         @empty
                             None.
                         @endforelse
@@ -53,7 +53,7 @@
                     <div>
                         <h5 class="mr-1 inline">Skill:</h5>
                         @forelse ($project->attributes->where('attributetype', 'skill') as $attribute)
-                            {{ $attribute->name }}, 
+                            {{ $attribute->name }},
                         @empty
                             None.
                         @endforelse
@@ -61,7 +61,7 @@
                     <div>
                         <h5 class="mr-1 inline">Industry:</h5>
                         @forelse ($project->attributes->where('attributetype', 'industry') as $attribute)
-                            {{ $attribute->name }}, 
+                            {{ $attribute->name }},
                         @empty
                             None.
                         @endforelse
@@ -96,18 +96,7 @@
             @endif
         </div>
 
-        <!-- Applications -->
-        <div class="mb-5">
-            <h4 class="font-semibold">Aplications ({{ count($project->applications) }})</h4>
-            @forelse ($project->applications as $application)
-                <div class="my-5">
-                    {{ $application->user->name }} <br>
-                    Justification: {{ $application->justification }}
-                </div>
-                @empty
-                No applications.
-            @endforelse
-        </div>
+
         <!-- Allocations -->
         <div class="mb-5">
             <h4 class="font-semibold">Student Assignments ({{ count($project->allocations) }})</h4>
@@ -119,8 +108,21 @@
                         {{ $attribute->name }},
                     @endforeach
                 </div>
-                @empty
+            @empty
                 No applicants.
+            @endforelse
+        </div>
+
+        <!-- Applications -->
+        <div class="mb-5">
+            <h4 class="font-semibold">Aplications ({{ count($project->applications) }})</h4>
+            @forelse ($project->applications as $application)
+                <div class="my-5">
+                    {{ $application->user->name }} <br>
+                    Justification: {{ $application->justification }}
+                </div>
+            @empty
+                No applications.
             @endforelse
         </div>
     </div>
