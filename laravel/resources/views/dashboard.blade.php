@@ -11,7 +11,7 @@
                 <div class="m-5 rounded-2xl bg-white p-5 flex items-center"><div class="grow"><a
                         href="{{ url("project/provider/$ip->id") }}">{{ $ip->name }}</a></div>
                     {{-- Approve Button --}}
-                    @if (Auth::user()->usertype === 'teacher' && empty($useipr->approved_at))
+                    @if (Auth::user()->usertype === 'teacher' && empty($ip->approved_at))
                         <div>
                             <form method="POST" action="{{ url('partner/' . $ip->id . '/approve') }}">
                                 @csrf

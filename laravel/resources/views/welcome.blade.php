@@ -40,22 +40,22 @@
                     @auth
                         <div class="m-5 flex-1 rounded-2xl bg-white p-5">
                             <a href="{{ url('/home') }}"
-                                class="font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white">Home</a>
+                                class="font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 dark:text-gray-400 dark:hover:text-white">Home</a>
                         </div>
                     @else
                         <div class="m-5 flex-1 rounded-2xl bg-white p-10">
                             <h3 class="mb-8 text-lg font-semibold">Welcome back!</h3>
                             <p class="mb-8">Please login to your account to continue.</p>
                             <a href="{{ route('login') }}"
-                                class="inline-block w-full rounded-full bg-gradient-to-tl from-sky-500 to-violet-900 py-4 text-center font-semibold uppercase text-white opacity-90 hover:opacity-100 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white text-lg">Log
+                                class="inline-block w-full rounded-full bg-gradient-to-tl from-sky-500 to-violet-900 py-4 text-center text-lg font-semibold uppercase text-white opacity-90 hover:opacity-100 focus:outline focus:outline-2 dark:text-gray-400 dark:hover:text-white">Log
                                 in</a>
                         </div>
                         @if (Route::has('register'))
                             <div class="m-5 flex-1 rounded-2xl bg-white p-10">
                                 <h3 class="mb-8 text-lg font-semibold">Don't have an account?</h3>
-                            <p class="mb-8">Please sing up to start using today!</p>
+                                <p class="mb-8">Please sing up to start using today!</p>
                                 <a href="{{ route('register') }}"
-                                    class="inline-block w-full rounded-full bg-gradient-to-tl from-sky-500 to-violet-900 py-4 text-center font-semibold uppercase text-white opacity-90 hover:opacity-100 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white text-lg">Register</a>
+                                    class="inline-block w-full rounded-full bg-gradient-to-tl from-sky-500 to-violet-900 py-4 text-center text-lg font-semibold uppercase text-white opacity-90 hover:opacity-100 focus:outline focus:outline-2 dark:text-gray-400 dark:hover:text-white">Register</a>
                             </div>
                         @endif
                     @endauth

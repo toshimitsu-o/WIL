@@ -43,13 +43,13 @@
             </header>
         @endif
         @if (count($errors) > 0)
-            <div class="text-red-600">
+        <div class="mx-auto w-full max-w-screen-lg bg-red-100 rounded-xl bg-opacity-70 py-2 lg:px-8 text-red-600">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            </div>
+        </div>
         @endif
         <!-- Page Content -->
         <main class="m-auto my-6 w-full max-w-screen-lg grow rounded-3xl bg-white bg-opacity-70 p-5 text-gray-700">
