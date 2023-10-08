@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AttributeSeeder::class);
 
         // Create student users
-        \App\Models\User::factory()->count(30)->student()->create();
+        \App\Models\User::factory()->count(50)->student()->create();
         // Create 1 teacher, 7 ip users
         $this->call(UserSeeder::class);
 

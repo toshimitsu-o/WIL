@@ -45,7 +45,7 @@
                     <div>
                         <h5 class="mr-1 inline">Role:</h5>
                         @forelse ($project->attributes->where('attributetype', 'role') as $attribute)
-                            {{ $attribute->name }}
+                            {{ $attribute->name }}, 
                         @empty
                             None.
                         @endforelse
@@ -53,7 +53,7 @@
                     <div>
                         <h5 class="mr-1 inline">Skill:</h5>
                         @forelse ($project->attributes->where('attributetype', 'skill') as $attribute)
-                            {{ $attribute->name }}
+                            {{ $attribute->name }}, 
                         @empty
                             None.
                         @endforelse
@@ -61,7 +61,7 @@
                     <div>
                         <h5 class="mr-1 inline">Industry:</h5>
                         @forelse ($project->attributes->where('attributetype', 'industry') as $attribute)
-                            {{ $attribute->name }}
+                            {{ $attribute->name }}, 
                         @empty
                             None.
                         @endforelse
@@ -113,9 +113,9 @@
             <h4 class="font-semibold">Student Assignments ({{ count($project->allocations) }})</h4>
             @forelse ($project->allocations as $allocation)
                 <div class="my-5">
-                    {{ $allocation->user->name }} (GPA: {{ $application->user->gpa }})<br>
+                    {{ $allocation->user->name }} (GPA: {{ $allocation->user->gpa }})<br>
                     Attributes:
-                    @foreach ($application->user->attributes as $attribute)
+                    @foreach ($allocation->user->attributes as $attribute)
                         {{ $attribute->name }},
                     @endforeach
                 </div>

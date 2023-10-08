@@ -64,7 +64,7 @@ class User extends Authenticatable
      * Get allocation assosiated with the user
      */
     public function allocation() {
-        return $this->belongsTo(Allocation::class);
+        return $this->belongsTo(Allocation::class, 'allocations', 'user_id', 'project_id');
     }
 
     /**

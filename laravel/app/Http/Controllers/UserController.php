@@ -79,6 +79,9 @@ class UserController extends Controller
         //$assigned = array();
 
         foreach ($users as $user) {
+            if (Allocation::where('user_id', $user->id)->first()) {
+                continue;
+            }
             
             $project_ids = $user->applications->pluck('project_id')->toArray();
             //dd($project_ids);
