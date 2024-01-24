@@ -10,7 +10,7 @@ This web application facilitates the allocation of students to Work Integrated L
 - Vite
 
 ## ER Diagram of SQLite Database
-![Picture 1](https://github.com/toshimitsu-o/WIL/assets/89127228/cf0dc0d3-7467-4f8f-b442-cbdb90575b91)
+<img width="1238" alt="Diagram" src="https://github.com/toshimitsu-o/WIL/assets/89127228/f31e2adb-3d27-4559-84a8-96f667d9c97f">
 
 ## Key Features
 
