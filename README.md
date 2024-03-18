@@ -2,6 +2,9 @@
 
 This web application facilitates the allocation of students to Work Integrated Learning (WIL) projects. The system streamlines the process by allowing industry partners to advertise projects, enabling students to apply for preferred projects, and facilitating the assignment of students to projects. It also provides a automated mass assignment functionality.
 
+## Demonstration Video
+[![WIL Demonstration](https://img.youtube.com/vi/IcBs-lKqAtQ/0.jpg)](https://youtu.be/IcBs-lKqAtQ)
+
 ## Tech Stack
 - Laravel with Blade
 - Eloquent ORM
